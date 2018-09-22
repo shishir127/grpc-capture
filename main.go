@@ -45,6 +45,7 @@ func main() {
 		log.Fatalf("BPF Filter: %v", err)
 	}
 
+	fmt.Println(fmt.Sprintf("Starting capture on port %d, output file is %s", port, outputFileName))
 	pkgsrc := gopacket.NewPacketSource(handle, layers.LayerTypeEthernet)
 	for packet := range pkgsrc.Packets() {
 		if err := pcapw.WritePacket(packet.Metadata().CaptureInfo, packet.Data()); err != nil {
